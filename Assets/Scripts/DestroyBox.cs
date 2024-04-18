@@ -6,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class DestroyBox : MonoBehaviour
 {
     [SerializeField] bool isLeftWeapon = true;
-
+    [SerializeField] LevelController levelController;
     [Range(0, 1)]
     public float intensity;
     public float duration;
@@ -17,11 +17,13 @@ public class DestroyBox : MonoBehaviour
         {
             controller.SendHapticImpulse(intensity, duration);
             Destroy(other.gameObject);
+            levelController.IncreaseScore();
         }
         else if (!isLeftWeapon && other.gameObject.tag == "RightWeaponBox")
         {
             controller.SendHapticImpulse(intensity, duration);
             Destroy(other.gameObject);
+            levelController.IncreaseScore();
         }
     }
     void Start()
